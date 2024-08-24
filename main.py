@@ -156,13 +156,13 @@ def get_data():
             }
             print(data)
             if os.path.exists("insurances.xlsx"):
-                df = pd.read_excel("insurances.xlsx", engine='openpyxl')
+                df = pd.read_excel("insurances.xlsx")
                 df = pd.concat([df, pd.DataFrame([data])], ignore_index=True)
             else:
                 df = pd.DataFrame([data])
             
             try:
-                df.to_excel("insurances.xlsx", index=False, engine='openpyxl')
+                df.to_excel("insurances.xlsx", index=False)
             except Exception as e:
                 print(f"An error occurred while saving the file: {str(e)}")
         
