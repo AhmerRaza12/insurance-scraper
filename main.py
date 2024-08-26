@@ -22,13 +22,12 @@ Options.add_argument('--no-sandbox')
 Options.add_argument('--disable-dev-shm-usage')
 Options.add_argument('--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3')
 Options.add_argument('--start-maximized')
+Options.add_argument('--headless=new')
 
-chrome_install = ChromeDriverManager().install()
-folder = os.path.dirname(chrome_install)
-chromedriver_path = os.path.join(folder, "chromedriver.exe")
+service = ChromeService(ChromeDriverManager().install())
 
-service = ChromeService(chromedriver_path)
-driver=webdriver.Chrome(service=service, options=Options)
+driver = webdriver.Chrome(service=service, options=Options)
+
 
 def appendProduct(file_path2, data):
     temp_file = 'temp_file.xlsx'
