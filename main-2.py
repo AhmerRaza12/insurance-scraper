@@ -65,6 +65,7 @@ def click_next_page(times):
         try:
             next_button = driver.find_element(By.XPATH, "//img[@alt='next']")
             driver.execute_script("arguments[0].click();", next_button)
+            print(f"Page {_ + 1} clicked")
             try:
                 WebDriverWait(driver, 15).until_not(EC.presence_of_element_located((By.XPATH, "//div[@class='searching']")))
             except:

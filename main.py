@@ -20,7 +20,7 @@ import pandas as pd
 Options = webdriver.ChromeOptions()
 Options.add_argument('--no-sandbox')
 Options.add_argument('--disable-dev-shm-usage')
-Options.add_argument('--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3')
+Options.add_argument('--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36')
 Options.add_argument('--start-maximized')
 Options.add_argument('--headless=new')
 
@@ -67,7 +67,10 @@ def click_next_page(times):
     for _ in range(times):
         try:
             next_button = driver.find_element(By.XPATH, "//img[@alt='next']")
-            next_button.click()
+            driver.execute_script("arguments[0].scrollIntoView();", next_button)
+            driver.execute_script("window.scrollBy(0, -150)")
+            driver.execute_script("arguments[0].click();", next_button)
+            print(f"Page {_ + 1} clicked")
             try:
                 searching = driver.find_element(By.XPATH, "//div[@class='searching']")
                 if searching.is_displayed():
