@@ -76,7 +76,7 @@ def click_next_page(times):
                 if searching.is_displayed():
                     time.sleep(15)  
             except:
-                time.sleep(2)
+                time.sleep(1)
                 pass 
         except Exception as e:
             print(f"Error clicking next page: {e}")
@@ -146,8 +146,14 @@ def get_data():
                 processed_companies.add(" ")
             driver.close()
             driver.switch_to.window(driver.window_handles[0])
-            address = address_1[agent_names.index(agent_name)].text + " " + address_2[agent_names.index(agent_name)].text
-            phone_number = phone_numbers[agent_names.index(agent_name)].text
+            try:
+                address = address_1[agent_names.index(agent_name)].text + " " + address_2[agent_names.index(agent_name)].text
+            except:
+                address = ""
+            try:
+                phone_number = phone_numbers[agent_names.index(agent_name)].text
+            except:
+                phone_number = ""
             data = {
                 "First Name": first_name,
                 "Last Name": last_name,
